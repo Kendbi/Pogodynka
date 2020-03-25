@@ -33,20 +33,20 @@ class MainActivity : AppCompatActivity() {
 
         override fun doInBackground(vararg params: String?): String? {
             var response : String ?
-            //try {
+            try {
                 response = URL( "https://api.openweathermap.org/data/2.5/weather?q=${common.city}&units=metric&appid=${common.api}").readText(Charsets.UTF_8)
-            //}
-            //catch (e : Exception ) {
-              //  response = null
-            //}
+            }
+            catch (e : Exception ) {
+                response = null
+            }
             return response
         }
 
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
-            //if(result == null){
-              //  return
-            //}
+            if(result == null){
+                return
+            }
             val gson = Gson()
             val mType = object : TypeToken<OpenWeatherMap>() {}.type
 
