@@ -11,8 +11,7 @@ import com.example.weathermap.common.common
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_weather_report.*
+import kotlinx.android.synthetic.main.activity_main.*
 import java.net.URL
 
 class MainActivity : AppCompatActivity() {
@@ -23,7 +22,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        supportFragmentManager.beginTransaction().replace(R.id.container_frag, Home()).commit()
+        weatherButton.setOnClickListener{
+            weatherBtnHandler()
+        }
+        cityNameText.setOnClickListener{
+            cityNameText.text.clear();
+        }
     }
 
     private inner class GetWeather: AsyncTask<String, Void, String>() {
@@ -67,17 +71,19 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun showWeatherReport(){
-        GetWeather().execute(common.city, common.api)
-        //if(city_name == null){
-          //Toast.makeText(this, "Błąd przy wczytywaniu danych, spróbuj ponownie", Toast.LENGTH_SHORT).show()
-            //return
-        //}
 
-        val fm = supportFragmentManager
-        val wrFragment = weather_report()
-        fm.beginTransaction().replace(R.id.container_frag, wrFragment).addToBackStack(null)
-                .commit()
+
+    fun weatherBtnHandler(){
+
+        common.city = cityNameText.getText().toString().toLowerCase()
+        showWeatherReport()
+    }
+
+    fun showWeatherReport(){
+
+        GetWeather().execute(common.city, common.api)
+
 
     }
+
 }
