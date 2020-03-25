@@ -1,11 +1,10 @@
 package com.example.weathermap
-import android.os.AsyncTask
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
-import androidx.appcompat.app.AppCompatActivity
+import android.app.Activity
+import android.os.AsyncTask
 import android.os.Bundle
-import android.widget.Toast
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.example.weathermap.Model.OpenWeatherMap
 import com.example.weathermap.common.common
 import com.google.gson.Gson
@@ -13,6 +12,7 @@ import com.google.gson.reflect.TypeToken
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import java.net.URL
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -70,20 +70,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
-
     fun weatherBtnHandler(){
-
         common.city = cityNameText.getText().toString().toLowerCase()
         showWeatherReport()
     }
 
     fun showWeatherReport(){
-
         GetWeather().execute(common.city, common.api)
-
-
     }
+
 
 }
